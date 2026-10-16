@@ -49,6 +49,15 @@
   @media (max-width:430px) { h1 { font-size:34px; } .wrap { padding-block:34px 48px; } }
   .card[id] { scroll-margin-top:16px; }
   .card:target { box-shadow:0 0 0 3px #f5a0b0; }   /* 냥멍이 말풍선 [바뀐 것 보기]로 들어오면 그 버전 카드 강조 */
+  /* 처음 설치 / 업데이트 두 카드를 옆으로 나란히 (좁은 화면에선 위아래) */
+  .duo { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:14px; margin-bottom:18px; }
+  .duo .card { margin-bottom:0; min-width:0; display:flex; flex-direction:column; padding:20px 18px; }
+  .duo .card h2 { font-size:21px; }
+  .duo .card p { font-size:13px; margin-bottom:12px; }
+  .duo .note { font-size:12px; padding:9px 11px; }
+  .duo .dl { margin-top:auto; padding:9px 12px; font-size:14.5px; border-radius:13px; }
+  .duo .dl small { font-size:11px; }
+  @media (max-width:560px) { .duo { grid-template-columns:minmax(0,1fr); } }
 </style>
 </head>
 <body>
@@ -83,22 +92,24 @@
     <span class="ver">지금 버전 v1.6.5</span>
   </header>
 
-  <div class="card">
-    <h2>처음이신가요?</h2>
-    <p>아래 파일을 받아서 실행하면 설치가 끝납니다. 따로 준비할 건 없어요.</p>
-    <a class="dl new" href="%EB%83%A5%EB%A9%8D%EC%9D%B4_%EC%84%A4%EC%B9%98.exe" download>
-      냥멍이 설치하기
-      <small>처음 쓰는 컴퓨터에</small>
-    </a>
-  </div>
+  <div class="duo">
+    <div class="card">
+      <h2>처음이신가요?</h2>
+      <p>아래 파일을 받아서 실행하면 설치가 끝납니다. 따로 준비할 건 없어요.</p>
+      <a class="dl new" href="%EB%83%A5%EB%A9%8D%EC%9D%B4_%EC%84%A4%EC%B9%98.exe" download>
+        냥멍이 설치하기
+        <small>처음 쓰는 컴퓨터에</small>
+      </a>
+    </div>
 
-  <div class="card">
-    <h2>이미 쓰고 계신가요?</h2>
-    <p>지금 것을 지울 필요 없어요. 아래 파일만 실행하면 새 버전으로 바뀌고, 이름·학교·할 일·일정은 그대로 남습니다.</p>
-    <a class="dl upd" href="%EB%83%A5%EB%A9%8D%EC%9D%B4_%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8.exe" download>
-      업데이트하기
-      <small>창 없이 잠깐 만에 끝나요</small>
-    </a>
+    <div class="card">
+      <h2>이미 쓰고 계신가요?</h2>
+      <p>지금 것을 지울 필요 없어요. 아래 파일만 실행하면 새 버전으로 바뀌고, 이름·학교·할 일·일정은 그대로 남습니다.</p>
+      <a class="dl upd" href="%EB%83%A5%EB%A9%8D%EC%9D%B4_%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8.exe" download>
+        업데이트하기
+        <small>창 없이 잠깐 만에 끝나요</small>
+      </a>
+    </div>
   </div>
 
   <div class="card" id="v1.6.5">
