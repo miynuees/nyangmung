@@ -10,80 +10,120 @@
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Gaegu:wght@700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg1:#fff6f0; --bg2:#f3f0ff; --ink:#4a4046; --sub:#a08a92;
-    --card:#ffffff; --line:#f1eef0; --point:#e07a8c; --point2:#9c8ab5; --ok:#cdeedb; --okink:#2f6b45;
+    --bg1:#fff6f0; --bg2:#f3f0ff; --ink:#4a4046; --sub:#a08a92; --faint:#c9b8bf;
+    --card:#ffffff; --line:#f1e8ec; --point:#e07a8c; --point2:#9c8ab5; --ok:#cdeedb; --okink:#2f6b45;
+    --shadow:0 3px 14px rgba(120,90,100,.09);
   }
   * { box-sizing:border-box; }
   body { margin:0; min-height:100vh; padding:0 16px;
-    background:linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 100%);
+    background:linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 100%) fixed;
     font-family:'Gowun Dodum', 'Malgun Gothic', sans-serif; color:var(--ink); line-height:1.7; }
-  .wrap { max-width:620px; margin:0 auto; padding-block:48px 64px; }
+  .wrap { max-width:720px; margin:0 auto; padding-block:40px 64px; }
+  img { max-width:100%; display:block; }
+  .hand { font-family:'Gaegu', 'Malgun Gothic', sans-serif; }
 
-  header { text-align:center; margin-bottom:22px; }
-  .art { height:118px; display:flex; justify-content:center; align-items:flex-end; margin-bottom:6px; }
+  /* ── 맨 위 ── */
+  header { text-align:center; margin-bottom:20px; }
+  .art { height:118px; display:flex; justify-content:center; align-items:flex-end; margin-bottom:4px; }
+  .art > [hidden] { display:none; }
   .cat { width:150px; height:118px; animation:float 3.4s ease-in-out infinite; }
   .pets { display:flex; justify-content:center; gap:4px; }
   .pet { width:132px; height:104px; animation:float 3.4s ease-in-out infinite; }
   .pet:nth-child(2) { animation-delay:-1.7s; }
   .pet .px { shape-rendering:crispEdges; }
-  /* 도트 그림에서 평소엔 안 보이는 부품 */
   .pet .eye-closed, .pet .eye-happy, .pet #mouth-open, .pet #paw-up, .pet #acc > g { display:none; }
   .pet #acc > #ac-ribbon { display:inline; }
   @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-7px); } }
-  h1 { font-family:'Gaegu', 'Malgun Gothic', sans-serif; font-size:42px; margin:0 0 6px; color:var(--point2); letter-spacing:1px; }
-  .lead { color:var(--sub); font-size:15px; margin:0; word-break:keep-all; }
-  .ver { display:inline-block; margin-top:10px; background:#fff; border-radius:999px; padding:3px 14px;
-    font-size:13px; color:var(--point2); box-shadow:0 1px 4px rgba(120,90,100,.1); }
 
-  /* 위쪽 냥멍이 / 냥멍톡 고르기 */
-  .tabs { display:grid; grid-template-columns:1fr 1fr; gap:8px; background:rgba(255,255,255,.6);
-    border-radius:20px; padding:6px; margin-bottom:22px; box-shadow:0 2px 10px rgba(120,90,100,.07); }
-  .tabs button { border:0; background:transparent; border-radius:15px; padding:9px 8px 8px; cursor:pointer;
-    font-family:inherit; color:var(--sub); transition:background .15s, color .15s; }
-  .tabs button b { display:block; font-family:'Gaegu', sans-serif; font-size:22px; line-height:1.2; }
-  .tabs button span { display:block; font-size:12px; word-break:keep-all; }
-  .tabs button[aria-selected="true"] { background:#fff; color:var(--point); box-shadow:0 2px 8px rgba(120,90,100,.12); }
-  .tabs button[aria-selected="true"] span { color:var(--sub); }
-  .panel[hidden], .art > [hidden] { display:none; }
+  .tabs { display:inline-grid; grid-template-columns:1fr 1fr; gap:4px; background:rgba(255,255,255,.7);
+    border-radius:999px; padding:5px; box-shadow:0 2px 10px rgba(120,90,100,.08); margin-top:6px; }
+  .tabs button { border:0; background:transparent; border-radius:999px; padding:6px 26px 4px; cursor:pointer;
+    font:700 24px/1.3 'Gaegu', sans-serif; color:var(--faint); transition:background .15s, color .15s; }
+  .tabs button[aria-selected="true"] { background:#fff; color:var(--point); box-shadow:0 2px 8px rgba(120,90,100,.13); }
+  .lead { color:var(--sub); font-size:15px; margin:14px 0 0; word-break:keep-all; }
 
-  .card { background:var(--card); border-radius:22px; padding:24px 22px; margin-bottom:18px;
-    box-shadow:0 3px 14px rgba(120,90,100,.09); }
-  .card h2 { font-family:'Gaegu', sans-serif; font-size:24px; margin:0 0 4px; color:var(--point); }
-  .card p { margin:0 0 16px; font-size:14px; color:var(--sub); word-break:keep-all; }
+  .panel[hidden] { display:none; }
 
-  .dl { display:block; text-align:center; text-decoration:none; border-radius:16px; padding:15px 18px;
-    font-size:17px; font-weight:bold; transition:transform .12s, filter .12s; }
-  .dl:hover { filter:brightness(.97); } .dl:active { transform:scale(.985); }
-  .dl.new { background:linear-gradient(135deg,#ffd6e2,#ffe9d6); color:#8a3a4a; }
-  .dl.upd { background:var(--ok); color:var(--okink); }
-  .dl small { display:block; font-size:12px; font-weight:normal; opacity:.75; margin-top:2px; }
+  /* ── 받기 ── */
+  .get { display:flex; flex-direction:column; align-items:center; gap:8px; margin:22px 0 40px; }
+  .dl { display:inline-flex; align-items:center; gap:10px; text-decoration:none; border-radius:999px; padding:13px 30px;
+    font-size:17px; font-weight:bold; background:linear-gradient(135deg,#ffd6e2,#ffe9d6); color:#8a3a4a;
+    box-shadow:0 4px 14px rgba(224,122,140,.22); transition:transform .12s, filter .12s; }
+  .dl:hover { filter:brightness(.98); transform:translateY(-1px); } .dl:active { transform:scale(.98); }
+  .dl .v { font-size:12px; font-weight:normal; background:rgba(255,255,255,.7); border-radius:999px; padding:1px 9px; }
+  .upd { font-size:13.5px; color:var(--sub); word-break:keep-all; text-align:center; }
+  .upd a { color:var(--okink); font-weight:bold; text-decoration:none; background:var(--ok); border-radius:999px; padding:2px 11px; margin-left:4px; white-space:nowrap; }
+  .warn { font-size:12.5px; color:var(--faint); text-align:center; word-break:keep-all; }
 
-  ul { margin:0; padding-left:19px; font-size:14px; }
-  li { margin-bottom:7px; word-break:keep-all; }
-  li b { color:var(--point2); }
-  .note { background:#fffaf0; border-left:4px solid #f6d36b; border-radius:0 12px 12px 0;
-    padding:12px 14px; font-size:13.5px; color:#7a6e74; margin-top:6px; word-break:keep-all; }
-  .foot { text-align:center; color:var(--sub); font-size:12.5px; margin-top:30px; }
-  a.guide { color:var(--point2); }
+  /* ── 구역 제목 ── */
+  h2.sec { font-family:'Gaegu', sans-serif; font-size:28px; color:var(--point2); text-align:center; margin:0 0 16px; }
+  section.block { margin-bottom:44px; }
 
-  .older { margin-bottom:18px; }
+  /* ── 이런 걸 해요 (그림 + 한 줄) ── */
+  .feats { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; }
+  .feat { background:var(--card); border-radius:20px; box-shadow:var(--shadow); padding:14px 14px 12px; display:flex; flex-direction:column; }
+  .feat .shot { background:linear-gradient(160deg,#fff2ec,#efeafd); border-radius:14px; height:190px; display:flex; align-items:flex-end; justify-content:center; overflow:hidden; padding:10px 10px 0; }
+  .feat .shot img { max-height:100%; width:auto; object-fit:contain; }
+  .feat b { display:block; margin-top:10px; font-size:15px; color:var(--ink); }
+  .feat span { font-size:13px; color:var(--sub); word-break:keep-all; line-height:1.55; }
+
+  /* ── 냥멍톡 첫 그림 ── */
+  .hero { border-radius:20px; overflow:hidden; box-shadow:var(--shadow); margin-bottom:10px; }
+  .cap { text-align:center; font-size:13px; color:var(--sub); margin:0; word-break:keep-all; }
+
+  /* ── 따라 하기 ── */
+  .how { background:var(--card); border-radius:22px; box-shadow:var(--shadow); padding:20px; margin-bottom:16px;
+    display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:20px; align-items:center; }
+  .how.flip .pics { order:2; }
+  .how h3 { font-family:'Gaegu', sans-serif; font-size:23px; color:var(--point); margin:0 0 8px; }
+  .how ol { margin:0; padding:0; list-style:none; counter-reset:s; }
+  .how ol li { counter-increment:s; position:relative; padding-left:30px; margin-bottom:9px; font-size:14px; word-break:keep-all; line-height:1.6; }
+  .how ol li::before { content:counter(s); position:absolute; left:0; top:1px; width:21px; height:21px; border-radius:50%;
+    background:#ffe1e8; color:var(--point); font-size:12px; font-weight:bold; text-align:center; line-height:21px; }
+  .how ol li b { color:var(--point2); }
+  .pics { display:flex; gap:10px; justify-content:center; align-items:flex-start; }
+  .pics.stack { flex-direction:column; align-items:center; }
+  .shotbox { position:relative; border-radius:14px; overflow:hidden; box-shadow:0 2px 10px rgba(120,90,100,.14); border:1px solid var(--line); background:#fff; flex:1; max-width:250px; }
+  .shotbox.plain { box-shadow:none; border:0; background:linear-gradient(160deg,#fff2ec,#efeafd); padding:8px 8px 0; }
+  .ring { position:absolute; border:3px solid #f27c98; border-radius:12px; box-shadow:0 0 0 4px rgba(242,124,152,.18); animation:blink 1.8s ease-in-out infinite; pointer-events:none; }
+  @keyframes blink { 50% { box-shadow:0 0 0 8px rgba(242,124,152,.05); } }
+
+  /* ── 작은 안내 ── */
+  .tips { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; }
+  .tip { background:rgba(255,255,255,.75); border-radius:16px; padding:12px 14px; font-size:13px; color:var(--sub); word-break:keep-all; line-height:1.55; }
+  .tip .ic { font-size:20px; display:block; margin-bottom:2px; }
+  .tip a { color:var(--point2); }
+
+  /* ── 업데이트 기록 ── */
+  .log .card { background:var(--card); border-radius:18px; padding:16px 20px; margin-bottom:10px; box-shadow:var(--shadow); }
+  .log .card h2 { font-family:'Gaegu', sans-serif; font-size:20px; margin:0 0 4px; color:var(--point); }
+  .log ul { margin:0; padding-left:19px; font-size:13.5px; }
+  .log li { margin-bottom:5px; word-break:keep-all; }
+  .log li b { color:var(--point2); }
+  .log .card[id] { scroll-margin-top:16px; }
+  .log .card:target { box-shadow:0 0 0 3px #f5a0b0; }   /* 말풍선 [바뀐 것 보기]로 들어오면 그 버전 카드 강조 */
   .older > summary { list-style:none; cursor:pointer; text-align:center; color:var(--point2); font-size:14px;
-    background:rgba(255,255,255,.6); border-radius:999px; padding:8px 16px; margin-bottom:18px; }
+    background:rgba(255,255,255,.65); border-radius:999px; padding:7px 16px; margin:4px auto 12px; width:max-content; }
   .older > summary::-webkit-details-marker { display:none; }
   .older[open] > summary { color:var(--sub); }
 
-  @media (max-width:430px) { h1 { font-size:34px; } .wrap { padding-block:34px 48px; } .pet { width:112px; height:88px; } .art { height:104px; } .cat { width:132px; height:104px; } }
-  .card[id] { scroll-margin-top:16px; }
-  .card:target { box-shadow:0 0 0 3px #f5a0b0; }   /* 말풍선 [바뀐 것 보기]로 들어오면 그 버전 카드 강조 */
-  /* 처음 설치 / 업데이트 두 카드를 옆으로 나란히 (좁은 화면에선 위아래) */
-  .duo { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:14px; margin-bottom:18px; }
-  .duo .card { margin-bottom:0; min-width:0; display:flex; flex-direction:column; padding:20px 18px; }
-  .duo .card h2 { font-size:21px; }
-  .duo .card p { font-size:13px; margin-bottom:12px; }
-  .duo .note { font-size:12px; padding:9px 11px; }
-  .duo .dl { margin-top:auto; padding:9px 12px; font-size:14.5px; border-radius:13px; }
-  .duo .dl small { font-size:11px; }
-  @media (max-width:560px) { .duo { grid-template-columns:minmax(0,1fr); } }
+  .foot { text-align:center; color:var(--sub); font-size:12.5px; margin-top:30px; }
+
+  /* 그림 크게 보기 */
+  .zoomable { cursor:zoom-in; }
+  #zoom { position:fixed; inset:0; background:rgba(60,45,55,.55); display:none; align-items:center; justify-content:center; padding:20px; z-index:9; cursor:zoom-out; }
+  #zoom.on { display:flex; }
+  #zoom img { max-height:92vh; max-width:94vw; width:auto; border-radius:16px; background:#fff; box-shadow:0 10px 40px rgba(0,0,0,.25); }
+
+  @media (max-width:600px) {
+    .wrap { padding-block:30px 48px; }
+    .how, .how.flip { grid-template-columns:minmax(0,1fr); gap:14px; }
+    .how.flip .pics { order:0; }
+    .tips { grid-template-columns:minmax(0,1fr); }
+    .feat .shot { height:150px; }
+    .tabs button { padding:5px 20px 3px; font-size:22px; }
+  }
+  @media (max-width:380px) { .feats { grid-template-columns:minmax(0,1fr); } }
 </style>
 </head>
 <body>
@@ -92,320 +132,370 @@
   <header>
     <div class="art">
   <svg class="cat" viewBox="0 0 150 118" xmlns="http://www.w3.org/2000/svg" aria-label="냥멍이 고양이 그림">
-      <ellipse cx="75" cy="114" rx="46" ry="5" fill="#6b4c58" opacity=".12"/>
-      <path d="M118 104 C 140 100, 146 80, 134 68" fill="none" stroke="#f6c9a3" stroke-width="10" stroke-linecap="round"/>
-      <path d="M118 104 C 140 100, 146 80, 134 68" fill="none" stroke="#ffe3c8" stroke-width="6" stroke-linecap="round"/>
-      <ellipse cx="75" cy="92" rx="44" ry="26" fill="#ffe3c8"/>
-      <ellipse cx="75" cy="98" rx="24" ry="14" fill="#fff5ea"/>
-      <ellipse cx="56" cy="112" rx="12" ry="6" fill="#ffe3c8" stroke="#f6c9a3" stroke-width="1.2"/>
-      <ellipse cx="94" cy="112" rx="12" ry="6" fill="#ffe3c8" stroke="#f6c9a3" stroke-width="1.2"/>
-      <path d="M40 48 L 34 14 L 62 32 Z" fill="#ffe3c8"/><path d="M43 42 L 40 22 L 57 33 Z" fill="#ffc4cc"/>
-      <path d="M110 48 L 116 14 L 88 32 Z" fill="#ffe3c8"/><path d="M107 42 L 110 22 L 93 33 Z" fill="#ffc4cc"/>
-      <circle cx="75" cy="58" r="40" fill="#ffe3c8"/>
-      <path d="M66 22 q9 -4 18 0" stroke="#f6c9a3" stroke-width="4" stroke-linecap="round" fill="none"/>
-      <path d="M60 30 q15 -6 30 0" stroke="#f6c9a3" stroke-width="4" stroke-linecap="round" fill="none"/>
-      <circle cx="52" cy="70" r="7" fill="#ffc4cc" opacity=".75"/>
-      <circle cx="98" cy="70" r="7" fill="#ffc4cc" opacity=".75"/>
-      <path d="M54 62 q6 -7 12 0" stroke="#4a4046" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-      <path d="M84 62 q6 -7 12 0" stroke="#4a4046" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-      <path d="M72 70 L 78 70 L 75 74 Z" fill="#f5a0b0"/>
-      <path d="M75 74 q-3 5 -7 2 M75 74 q3 5 7 2" stroke="#8a6e78" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-      <g stroke="#d9b39a" stroke-width="1.4" stroke-linecap="round">
-        <path d="M46 72 h-14 M46 77 l-13 3"/><path d="M104 72 h14 M104 77 l13 3"/>
-      </g>
-    </svg>
+        <ellipse cx="75" cy="114" rx="46" ry="5" fill="#6b4c58" opacity=".12"/>
+        <path d="M118 104 C 140 100, 146 80, 134 68" fill="none" stroke="#f6c9a3" stroke-width="10" stroke-linecap="round"/>
+        <path d="M118 104 C 140 100, 146 80, 134 68" fill="none" stroke="#ffe3c8" stroke-width="6" stroke-linecap="round"/>
+        <ellipse cx="75" cy="92" rx="44" ry="26" fill="#ffe3c8"/>
+        <ellipse cx="75" cy="98" rx="24" ry="14" fill="#fff5ea"/>
+        <ellipse cx="56" cy="112" rx="12" ry="6" fill="#ffe3c8" stroke="#f6c9a3" stroke-width="1.2"/>
+        <ellipse cx="94" cy="112" rx="12" ry="6" fill="#ffe3c8" stroke="#f6c9a3" stroke-width="1.2"/>
+        <path d="M40 48 L 34 14 L 62 32 Z" fill="#ffe3c8"/><path d="M43 42 L 40 22 L 57 33 Z" fill="#ffc4cc"/>
+        <path d="M110 48 L 116 14 L 88 32 Z" fill="#ffe3c8"/><path d="M107 42 L 110 22 L 93 33 Z" fill="#ffc4cc"/>
+        <circle cx="75" cy="58" r="40" fill="#ffe3c8"/>
+        <path d="M66 22 q9 -4 18 0" stroke="#f6c9a3" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <path d="M60 30 q15 -6 30 0" stroke="#f6c9a3" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <circle cx="52" cy="70" r="7" fill="#ffc4cc" opacity=".75"/>
+        <circle cx="98" cy="70" r="7" fill="#ffc4cc" opacity=".75"/>
+        <path d="M54 62 q6 -7 12 0" stroke="#4a4046" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+        <path d="M84 62 q6 -7 12 0" stroke="#4a4046" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+        <path d="M72 70 L 78 70 L 75 74 Z" fill="#f5a0b0"/>
+        <path d="M75 74 q-3 5 -7 2 M75 74 q3 5 7 2" stroke="#8a6e78" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+        <g stroke="#d9b39a" stroke-width="1.4" stroke-linecap="round">
+          <path d="M46 72 h-14 M46 77 l-13 3"/><path d="M104 72 h14 M104 77 l13 3"/>
+        </g>
+      </svg>
       <div class="pets" id="art-talk" hidden><div class="pet" id="pet-cat"></div><div class="pet" id="pet-dog"></div></div>
     </div>
-    <h1 id="title">냥멍이</h1>
+    <div class="tabs" role="tablist">
+      <button role="tab" id="tab-cat" aria-selected="true" onclick="pickTab('cat', true)">냥멍이</button>
+      <button role="tab" id="tab-talk" aria-selected="false" onclick="pickTab('talk', true)">냥멍톡</button>
+    </div>
     <p class="lead" id="lead"></p>
-    <span class="ver" id="ver"></span>
   </header>
 
-  <div class="tabs" role="tablist">
-    <button role="tab" id="tab-cat" aria-selected="true" onclick="pickTab('cat', true)"><b>냥멍이</b><span>혼자 쓰는 책상 친구</span></button>
-    <button role="tab" id="tab-talk" aria-selected="false" onclick="pickTab('talk', true)"><b>냥멍톡</b><span>쌤들끼리 한마디 (시험판)</span></button>
-  </div>
-
-  <section class="panel" id="panel-cat">
-  <div class="duo">
-    <div class="card">
-      <h2>처음이신가요?</h2>
-      <p>아래 파일을 받아서 실행하면 설치가 끝납니다. 따로 준비할 건 없어요.</p>
-      <a class="dl new" href="%EB%83%A5%EB%A9%8D%EC%9D%B4_%EC%84%A4%EC%B9%98.exe" download>
-        냥멍이 설치하기
-        <small>처음 쓰는 컴퓨터에</small>
-      </a>
+  <!-- ════════════ 냥멍이 ════════════ -->
+  <div class="panel" id="panel-cat">
+    <div class="get">
+      <a class="dl" href="%EB%83%A5%EB%A9%8D%EC%9D%B4_%EC%84%A4%EC%B9%98.exe" download>냥멍이 설치하기 <span class="v">v1.7.0</span></a>
+      <div class="upd">이미 사용하고 있는 분들은 오른쪽 버튼을 눌러 업데이트하면 하루에 한 번 자동으로 업데이트됩니다.<a href="%EB%83%A5%EB%A9%8D%EC%9D%B4_%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8.exe" download>업데이트</a></div>
+      <div class="warn">파란 경고창이 뜨면 "추가 정보" → "실행"을 눌러 주세요.</div>
     </div>
 
-    <div class="card">
-      <h2>이미 쓰고 계신가요?</h2>
-      <p>지금 것을 지울 필요 없어요. 아래 파일만 실행하면 새 버전으로 바뀌고, 이름·학교·할 일·일정은 그대로 남습니다.</p>
-      <a class="dl upd" href="%EB%83%A5%EB%A9%8D%EC%9D%B4_%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8.exe" download>
-        업데이트하기
-        <small>창 없이 잠깐 만에 끝나요</small>
-      </a>
-    </div>
+    <section class="block">
+      <h2 class="sec">이런 걸 해요</h2>
+      <div class="feats">
+        <div class="feat"><div class="shot"><img class="zoomable" src="img/nm_today.webp" alt="급식과 날씨" loading="lazy"></div><b>오늘 급식 · 날씨</b><span>우리 학교 급식과 날씨를 보여 줘요. 비 오는 날엔 우산을 챙기라고 해요.</span></div>
+        <div class="feat"><div class="shot"><img class="zoomable" src="img/nm_todo.webp" alt="할 일" loading="lazy"></div><b>할 일 · 일정</b><span>적어 두고 체크해요. [말풍선 고정]을 누르면 머리 위에 쪽지로 떠 있어요.</span></div>
+        <div class="feat"><div class="shot"><img class="zoomable" src="img/nm_perm.webp" alt="클로드 허락 버튼" loading="lazy"></div><b>Claude 작업 알림</b><span>Claude Code가 하는 일을 말풍선으로 알려 주고, 허락 버튼을 대신 눌러 줘요.</span></div>
+        <div class="feat"><div class="shot"><img class="zoomable" src="img/nm_settings.webp" alt="모습 고르기" loading="lazy"></div><b>모습 꾸미기</b><span>고양이·강아지, 무늬, 소품, 도트 그림을 골라요. 간식도 줄 수 있어요.</span></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="tips">
+        <div class="tip"><span class="ic">🖱️</span>옆의 ≡ 버튼은 오늘, ⚙ 버튼은 설정. 끌면 자리를 옮겨요.</div>
+        <div class="tip"><span class="ic">🔒</span>할 일·일정은 내 컴퓨터에만 저장돼요.</div>
+        <div class="tip"><span class="ic">📖</span>자세한 설명은 <a href="%EB%83%A5%EB%A9%8D%EC%9D%B4_%EC%82%AC%EC%9A%A9%EC%95%88%EB%82%B4.html">사용안내</a>에 있어요.</div>
+      </div>
+    </section>
+
+    <section class="block log">
+      <h2 class="sec">업데이트 기록</h2>
+      <div class="card" id="v1.7.0">
+        <h2>v1.7.0에서 바뀐 것</h2>
+        <ul>
+          <li><b>할 일·일정을 말풍선에 고정</b>할 수 있어요. ≡ 오늘 → 할 일이나 일정 탭에서 [말풍선 고정]을 누르면 냥멍이 머리 위에 노란 쪽지가 계속 떠 있어요. 쪽지의 동그라미를 누르면 바로 완료돼요.</li>
+          <li><b>바탕화면에만 둘 수 있어요.</b> 설정 → "화면에 있을 곳"을 [바탕화면에만]으로 바꾸면 다른 창 뒤에 있다가 바탕화면을 볼 때(Win+D)만 보여요. Claude가 허락을 기다릴 때는 잠깐 앞으로 나와요.</li>
+          <li><b>설정을 줄였어요.</b> 기지개 권유·어슬렁 걷기·먼저 말 걸기·깨어 있기는 이제 늘 켜져 있어요.</li>
+        </ul>
+      </div>
+          <details class="older">
+        <summary>지난 버전 더 보기</summary>
+          <div class="card" id="v1.6.5">
+            <h2>v1.6.5에서 바뀐 것</h2>
+            <ul>
+              <li>업데이트 뒤 말풍선이 짧아졌어요. [바뀐 것 보기]를 누르면 이 페이지에서 바뀐 내용을 볼 수 있어요.</li>
+              <li>냥멍톡을 같이 쓰는 컴퓨터에서 업데이트할 때, 클로드 말풍선 연결을 냥멍톡에서 가져오지 않아요.</li>
+            </ul>
+          </div>
+          <div class="card" id="v1.6.4">
+            <h2>v1.6.4에서 바뀐 것</h2>
+            <ul>
+              <li><b>도트 강아지 얼굴을 다듬었어요</b> — 도트 그림으로 볼 때 강아지 코와 주둥이를 작게 하고 입을 연하게 해서 더 동글동글해졌어요.</li>
+            </ul>
+          </div>
+          <div class="card" id="v1.6.3">
+            <h2>v1.6.3에서 바뀐 것</h2>
+            <ul>
+              <li><b>도트 그림을 골라 볼 수 있어요</b> — 설정 → 모습에서 [도트 그림]을 누르면 냥멍이가 옛날 게임 같은 도트 그림으로 바뀌어요. 무늬·소품·강아지 모두 돼요. [기본 그림]을 누르면 원래대로 돌아와요.</li>
+              <li><b>글씨체가 프리텐다드로 바뀌었어요</b> — 말풍선·메뉴·설정 글씨가 더 또렷해졌어요.</li>
+              <li><b>흐릿함을 고쳤어요</b> — 화면 배율을 125%·150%로 키운 노트북에서 냥멍이와 글씨가 흐릿하던 걸 고쳤어요.</li>
+              <li>업데이트되면 바뀐 것을 말풍선으로 알려 드려요.</li>
+            </ul>
+          </div>
+          <div class="card" id="v1.6.2">
+            <h2>v1.6.2에서 바뀐 것</h2>
+            <ul>
+              <li><b>할 일·일정이 5개 넘어도 전부 볼 수 있습니다</b> — 전에는 5개까지만 보이고 "그 뒤로 몇 개 더 있어요"라는 글자만 나왔습니다. 이제 목록 아래 <b>"다음 ▸ / ◂ 이전"</b>을 누르면 5개씩 넘겨 볼 수 있고, 넘긴 쪽에서 바로 체크하거나 지울 수 있습니다.</li>
+            </ul>
+          </div>
+          <div class="card" id="v1.6.1">
+            <h2>v1.6.1에서 고친 것</h2>
+            <ul>
+              <li><b>바로가기를 눌러도 "유효하지 않다"며 안 켜지던 문제</b> — 바로가기가 가리키던 주소가 컴퓨터에 따라 없는 길이 될 수 있었습니다. 바탕화면·시작메뉴 바로가기를 모두 고쳤고, 컴퓨터 켤 때 자동으로 나오게 해두신 분은 그 바로가기도 같이 고쳐집니다. 이름·학교·할 일·일정은 그대로 남습니다.</li>
+            </ul>
+          </div>
+          <div class="card" id="v1.6.0">
+            <h2>v1.6.0에서 바뀐 것</h2>
+            <ul>
+              <li><b>가끔 어슬렁 걸어다닙니다</b> — 일이 없고 조용할 때, 1~2분에 한 번쯤 옆으로 뒤뚱뒤뚱 걸어갔다가 잠깐 서서 두리번거리고 제자리로 돌아옵니다. 손으로 옮겨 둔 자리를 집으로 기억해서 그 근처에서만 다니고, 화면 끝에 닿으면 돌아섭니다. 말을 걸거나 붙잡거나 일이 시작되면 그 자리에서 멈춥니다. 돌아다니는 게 번거로우면 설정 ⚙의 <b>"가끔 어슬렁 걸어다니기"</b>를 끄면 됩니다.</li>
+            </ul>
+          </div>
+          <div class="card" id="v1.5.0">
+            <h2>v1.5.0에서 바뀐 것</h2>
+            <ul>
+              <li><b>업데이트를 알아서 합니다</b> — 전에는 새 버전이 나오면 "받을까요?" 하고 물어보고, 눌러야 갈아입었습니다. 이제는 묻지 않고 조용히 갈아입은 뒤, 다시 켜지면서 <b>"새 버전으로 바뀌었어요"</b> 한마디만 합니다. 누를 것이 없습니다. (일하는 중일 때는 건드리지 않고 다음날 합니다)</li>
+            </ul>
+          </div>
+          <div class="card" id="v1.4.9">
+            <h2>v1.4.9에서 고친 것</h2>
+            <ul>
+              <li><b>눌러도 엉뚱한 데가 눌리던 문제</b> — 화면 배율(글자·앱 크기)을 125%·150%로 쓰는 컴퓨터에서 냥멍이가 크게 보이고, 눌러도 빗나가거나 반응하지 않던 것을 고쳤습니다. 이제 어떤 배율에서도 보이는 자리 그대로 눌립니다.</li>
+            </ul>
+          </div>
+          <div class="card" id="v1.4.8">
+            <h2>v1.4.8에서 바뀐 것</h2>
+            <ul>
+              <li><b>새 버전 확인</b> — 설정 갈래에 있던 '새 버전 확인' 줄을 없애고, 설정창 제목 오른쪽 끝에 작은 <b>'새 버전 확인'</b> 글자로 옮겼습니다. 눌러서 확인합니다.</li>
+            </ul>
+          </div>
+          <div class="card" id="v1.4.6">
+            <h2>v1.4.6에서 고친 것</h2>
+            <ul>
+              <li><b>간식 먹는 모습</b> — 그릇 쪽으로 고개를 뻗다가 머리가 몸에서 떨어져 보이던 걸 고쳤습니다. 이제 그릇이 앞발 사이에 놓이고, 그 자리에서 고개만 까딱이며 먹습니다.</li>
+            </ul>
+          </div>
+          <div class="card" id="v1.4.5">
+            <h2>v1.4.5에 생긴 것</h2>
+            <ul>
+              <li><b>날씨</b> — 급식 옆에 오늘 날씨가 뜨고, 비 오는 날 아침엔 우산을 챙기라고 말해줍니다.</li>
+              <li><b>D-day 챙기기</b> — 시험·행사는 물론 직접 넣은 일정도 골라두면 며칠 남았는지 계속 보여줍니다.</li>
+              <li><b>집중 타이머</b> — 30분·50분, 또는 원하는 시간을 직접 정해서 쓸 수 있습니다. 그동안 조용히 옆에 있다가 끝나면 같이 기지개를 켭니다.</li>
+              <li><b>간식과 소품</b> — 왼쪽 그릇 버튼으로 간식을 줍니다. 고양이는 사료·생선·통조림, 강아지는 사료·뼈다귀·육포. 머리에는 베레모·리본·꽃·안경·왕관을 씌울 수 있습니다.</li>
+              <li><b>설정창 정리</b> — 모습 / 내 정보 / 설정 세 갈래로 나눠 한눈에 보이게 했습니다.</li>
+              <li><b>새 버전 알림</b> — 이제 새 버전이 나오면 냥멍이가 먼저 알려주고, 눌러주면 알아서 갈아입습니다.</li>
+            </ul>
+          </div>
+              </details>
+    </section>
   </div>
 
-  <div class="card" id="v1.7.0">
-    <h2>v1.7.0에서 바뀐 것</h2>
-    <ul>
-      <li><b>할 일·일정을 말풍선에 고정</b>할 수 있어요. ≡ 오늘 → 할 일이나 일정 탭에서 [말풍선 고정]을 누르면 냥멍이 머리 위에 노란 쪽지가 계속 떠 있어요. 쪽지의 동그라미를 누르면 바로 완료돼요.</li>
-      <li><b>바탕화면에만 둘 수 있어요.</b> 설정 → "화면에 있을 곳"을 [바탕화면에만]으로 바꾸면 다른 창 뒤에 있다가 바탕화면을 볼 때(Win+D)만 보여요. Claude가 허락을 기다릴 때는 잠깐 앞으로 나와요.</li>
-      <li><b>설정을 줄였어요.</b> 기지개 권유·어슬렁 걷기·먼저 말 걸기·깨어 있기는 이제 늘 켜져 있어요.</li>
-    </ul>
-  </div>
-  <div class="card" id="v1.6.5">
-    <h2>v1.6.5에서 바뀐 것</h2>
-    <ul>
-      <li>업데이트 뒤 말풍선이 짧아졌어요. [바뀐 것 보기]를 누르면 이 페이지에서 바뀐 내용을 볼 수 있어요.</li>
-      <li>냥멍톡을 같이 쓰는 컴퓨터에서 업데이트할 때, 클로드 말풍선 연결을 냥멍톡에서 가져오지 않아요.</li>
-    </ul>
-  </div>
-
-  <details class="older">
-    <summary>지난 버전 더 보기</summary>
-  <div class="card" id="v1.6.4">
-    <h2>v1.6.4에서 바뀐 것</h2>
-    <ul>
-      <li><b>도트 강아지 얼굴을 다듬었어요</b> — 도트 그림으로 볼 때 강아지 코와 주둥이를 작게 하고 입을 연하게 해서 더 동글동글해졌어요.</li>
-    </ul>
-  </div>
-  <div class="card" id="v1.6.3">
-    <h2>v1.6.3에서 바뀐 것</h2>
-    <ul>
-      <li><b>도트 그림을 골라 볼 수 있어요</b> — 설정 → 모습에서 [도트 그림]을 누르면 냥멍이가 옛날 게임 같은 도트 그림으로 바뀌어요. 무늬·소품·강아지 모두 돼요. [기본 그림]을 누르면 원래대로 돌아와요.</li>
-      <li><b>글씨체가 프리텐다드로 바뀌었어요</b> — 말풍선·메뉴·설정 글씨가 더 또렷해졌어요.</li>
-      <li><b>흐릿함을 고쳤어요</b> — 화면 배율을 125%·150%로 키운 노트북에서 냥멍이와 글씨가 흐릿하던 걸 고쳤어요.</li>
-      <li>업데이트되면 바뀐 것을 말풍선으로 알려 드려요.</li>
-    </ul>
-  </div>
-  <div class="card" id="v1.6.2">
-    <h2>v1.6.2에서 바뀐 것</h2>
-    <ul>
-      <li><b>할 일·일정이 5개 넘어도 전부 볼 수 있습니다</b> — 전에는 5개까지만 보이고 "그 뒤로 몇 개 더 있어요"라는 글자만 나왔습니다. 이제 목록 아래 <b>"다음 ▸ / ◂ 이전"</b>을 누르면 5개씩 넘겨 볼 수 있고, 넘긴 쪽에서 바로 체크하거나 지울 수 있습니다.</li>
-    </ul>
-  </div>
-  <div class="card" id="v1.6.1">
-    <h2>v1.6.1에서 고친 것</h2>
-    <ul>
-      <li><b>바로가기를 눌러도 "유효하지 않다"며 안 켜지던 문제</b> — 바로가기가 가리키던 주소가 컴퓨터에 따라 없는 길이 될 수 있었습니다. 바탕화면·시작메뉴 바로가기를 모두 고쳤고, 컴퓨터 켤 때 자동으로 나오게 해두신 분은 그 바로가기도 같이 고쳐집니다. 이름·학교·할 일·일정은 그대로 남습니다.</li>
-    </ul>
-  </div>
-  <div class="card" id="v1.6.0">
-    <h2>v1.6.0에서 바뀐 것</h2>
-    <ul>
-      <li><b>가끔 어슬렁 걸어다닙니다</b> — 일이 없고 조용할 때, 1~2분에 한 번쯤 옆으로 뒤뚱뒤뚱 걸어갔다가 잠깐 서서 두리번거리고 제자리로 돌아옵니다. 손으로 옮겨 둔 자리를 집으로 기억해서 그 근처에서만 다니고, 화면 끝에 닿으면 돌아섭니다. 말을 걸거나 붙잡거나 일이 시작되면 그 자리에서 멈춥니다. 돌아다니는 게 번거로우면 설정 ⚙의 <b>"가끔 어슬렁 걸어다니기"</b>를 끄면 됩니다.</li>
-    </ul>
-  </div>
-  <div class="card" id="v1.5.0">
-    <h2>v1.5.0에서 바뀐 것</h2>
-    <ul>
-      <li><b>업데이트를 알아서 합니다</b> — 전에는 새 버전이 나오면 "받을까요?" 하고 물어보고, 눌러야 갈아입었습니다. 이제는 묻지 않고 조용히 갈아입은 뒤, 다시 켜지면서 <b>"새 버전으로 바뀌었어요"</b> 한마디만 합니다. 누를 것이 없습니다. (일하는 중일 때는 건드리지 않고 다음날 합니다)</li>
-    </ul>
-  </div>
-  <div class="card" id="v1.4.9">
-    <h2>v1.4.9에서 고친 것</h2>
-    <ul>
-      <li><b>눌러도 엉뚱한 데가 눌리던 문제</b> — 화면 배율(글자·앱 크기)을 125%·150%로 쓰는 컴퓨터에서 냥멍이가 크게 보이고, 눌러도 빗나가거나 반응하지 않던 것을 고쳤습니다. 이제 어떤 배율에서도 보이는 자리 그대로 눌립니다.</li>
-    </ul>
-  </div>
-  <div class="card" id="v1.4.8">
-    <h2>v1.4.8에서 바뀐 것</h2>
-    <ul>
-      <li><b>새 버전 확인</b> — 설정 갈래에 있던 '새 버전 확인' 줄을 없애고, 설정창 제목 오른쪽 끝에 작은 <b>'새 버전 확인'</b> 글자로 옮겼습니다. 눌러서 확인합니다.</li>
-    </ul>
-  </div>
-  <div class="card" id="v1.4.6">
-    <h2>v1.4.6에서 고친 것</h2>
-    <ul>
-      <li><b>간식 먹는 모습</b> — 그릇 쪽으로 고개를 뻗다가 머리가 몸에서 떨어져 보이던 걸 고쳤습니다. 이제 그릇이 앞발 사이에 놓이고, 그 자리에서 고개만 까딱이며 먹습니다.</li>
-    </ul>
-  </div>
-  <div class="card" id="v1.4.5">
-    <h2>v1.4.5에 생긴 것</h2>
-    <ul>
-      <li><b>날씨</b> — 급식 옆에 오늘 날씨가 뜨고, 비 오는 날 아침엔 우산을 챙기라고 말해줍니다.</li>
-      <li><b>D-day 챙기기</b> — 시험·행사는 물론 직접 넣은 일정도 골라두면 며칠 남았는지 계속 보여줍니다.</li>
-      <li><b>집중 타이머</b> — 30분·50분, 또는 원하는 시간을 직접 정해서 쓸 수 있습니다. 그동안 조용히 옆에 있다가 끝나면 같이 기지개를 켭니다.</li>
-      <li><b>간식과 소품</b> — 왼쪽 그릇 버튼으로 간식을 줍니다. 고양이는 사료·생선·통조림, 강아지는 사료·뼈다귀·육포. 머리에는 베레모·리본·꽃·안경·왕관을 씌울 수 있습니다.</li>
-      <li><b>설정창 정리</b> — 모습 / 내 정보 / 설정 세 갈래로 나눠 한눈에 보이게 했습니다.</li>
-      <li><b>새 버전 알림</b> — 이제 새 버전이 나오면 냥멍이가 먼저 알려주고, 눌러주면 알아서 갈아입습니다.</li>
-    </ul>
-  </div>
-  </details>
-
-  <div class="card">
-    <h2>알아두면 좋은 것</h2>
-    <div class="note">
-      설치할 때 파란 경고창이 뜨면 <b>"추가 정보" → "실행"</b>을 눌러주세요.
-      개인이 만든 프로그램이라 뜨는 안내입니다.
-    </div>
-    <ul style="margin-top:14px">
-      <li>Claude Code를 쓰지 않아도 모든 기능이 그대로 동작합니다.</li>
-      <li>적어둔 할 일·일정은 내 컴퓨터 안에만 저장됩니다.</li>
-      <li>자세한 설명은 <a class="guide" href="%EB%83%A5%EB%A9%8D%EC%9D%B4_%EC%82%AC%EC%9A%A9%EC%95%88%EB%82%B4.html">사용안내</a>에 있어요.</li>
-    </ul>
-  </div>
-  </section>
-
-  <section class="panel" id="panel-talk" hidden>
-  <div class="duo">
-    <div class="card">
-      <h2>처음이신가요?</h2>
-      <p>아래 파일을 받아서 실행하면 설치가 끝나요. 따로 준비할 건 없어요.</p>
-      <a class="dl new" href="https://miynuees.github.io/nyangmungtalk/%EB%83%A5%EB%A9%8D%ED%86%A1_%EC%84%A4%EC%B9%98.exe" download>
-        냥멍톡 설치하기
-        <small>처음 쓰는 컴퓨터에</small>
-      </a>
+  <!-- ════════════ 냥멍톡 ════════════ -->
+  <div class="panel" id="panel-talk" hidden>
+    <div class="get">
+      <a class="dl" href="https://miynuees.github.io/nyangmungtalk/%EB%83%A5%EB%A9%8D%ED%86%A1_%EC%84%A4%EC%B9%98.exe" download>냥멍톡 설치하기 <span class="v">v0.3.0</span></a>
+      <div class="upd">이미 사용하고 있는 분들은 오른쪽 버튼을 눌러 업데이트하면 하루에 한 번 자동으로 업데이트됩니다.<a href="https://miynuees.github.io/nyangmungtalk/%EB%83%A5%EB%A9%8D%ED%86%A1_%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8.exe" download>업데이트</a></div>
+      <div class="warn">파란 경고창이 뜨면 "추가 정보" → "실행"을 눌러 주세요.</div>
     </div>
 
-    <div class="card">
-      <h2>이미 쓰고 계신가요?</h2>
-      <p>지금 것을 지울 필요 없어요. 아래 파일만 실행하면 새 버전으로 바뀌고, 닉네임·친구·대화·모습은 그대로 남아요.</p>
-      <div class="note" style="margin:0 0 12px">하루 한 번 <b>알아서 새 버전으로 바뀌어요.</b> 지금 바로 바꾸고 싶을 때만 눌러 주세요.</div>
-      <a class="dl upd" href="https://miynuees.github.io/nyangmungtalk/%EB%83%A5%EB%A9%8D%ED%86%A1_%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8.exe" download>
-        업데이트하기
-        <small>창 없이 잠깐 만에 끝나요</small>
-      </a>
-    </div>
-  </div>
+    <section class="block">
+      <div class="hero"><img class="zoomable" src="img/desk.webp" alt="바탕화면에 친구 냥멍이와 단체방 집이 떠 있는 모습"></div>
+      <p class="cap">바탕화면에 친구 냥멍이와 단체방 집을 띄워 두고, 메시지가 오면 말풍선으로 받아요.</p>
+    </section>
 
-  <div class="card" id="v0.3.0">
-    <h2>v0.3.0에서 바뀐 것</h2>
-    <ul>
-      <li><b>할 일·일정을 말풍선에 고정</b>할 수 있어요. 📅 오늘 → 할 일이나 일정 탭에서 [말풍선 고정]을 누르면 냥멍이 머리 위에 노란 쪽지가 계속 떠 있어요. 새 메시지 카드는 쪽지 위로 쌓여요.</li>
-      <li><b>바탕화면에만 둘 수 있어요.</b> ⚙️ 설정 → "화면에 있을 곳"을 [바탕화면에만]으로 바꾸면 냥멍이·친구·집이 다른 창 뒤에 있다가 바탕화면을 볼 때(Win+D)만 보여요. Claude가 허락을 기다릴 때는 잠깐 앞으로 나와요.</li>
-      <li><b>설정을 줄였어요.</b> 기지개 권유·어슬렁 걷기·먼저 말 걸기·깨어 있기는 이제 늘 켜져 있어요.</li>
-    </ul>
-  </div>
-  <div class="card" id="v0.2.5">
-    <h2>v0.2.5에서 바뀐 것</h2>
-    <ul>
-      <li><b>내 냥멍이에게도 👑 이름표</b>가 생겼어요. 친구 냥멍이와 같은 높이로 서요.</li>
-      <li>내 냥멍이도 작업 표시줄 아래로 숨거나 화면 밖으로 나가지 않아요.</li>
-      <li><b>겹쳐 있는 친구 냥멍이가 잘 눌려요.</b> 겹친 부분을 누르면 뒤에 있는 다른 프로그램이 눌리던 문제를 고쳤어요. 겹쳐 있으면 앞에 보이는 친구가 잡혀요.</li>
-      <li>다른 프로그램 창이 냥멍이 위를 덮어도 곧 다시 냥멍이가 맨 위로 올라와요.</li>
-    </ul>
-  </div>
+    <section class="block">
+      <h2 class="sec">이렇게 써요</h2>
 
-  <details class="older">
-    <summary>지난 버전 더 보기</summary>
-  <div class="card" id="v0.2.4">
-    <h2>v0.2.4에서 바뀐 것</h2>
-    <ul>
-      <li><b>내 냥멍이도 친구들과 놀아요</b> — 깨어 있는 친구가 옆에 있으면 서로 ♥ ♪ 인사를 하고, 가끔 친구가 내 냥멍이 옆으로 걸어와서 공을 주고받아요. 내 냥멍이를 친구 옆에 끌어다 놓아도 인사해요.</li>
-      <li>클로드가 일하는 중이거나 말풍선·메뉴가 떠 있을 땐 놀지 않아요.</li>
-    </ul>
-  </div>
-  <div class="card" id="v0.2.3">
-    <h2>v0.2.3에서 바뀐 것</h2>
-    <ul>
-      <li><b>냥멍이·친구 냥멍이·집이 조금 작아졌어요</b> (80%). 친구 냥멍이와 내 냥멍이가 같은 크기예요.</li>
-      <li>캐릭터 바로 옆 빈 곳을 누르면 뒤에 있는 바탕화면·프로그램이 눌려요. 클릭 범위를 캐릭터에 딱 맞게 줄였어요.</li>
-      <li>한 줄 메시지 칸에 <b>누구에게 보내는지</b> 나와요. (예: 메시지 보내기 · 워니 님에게)</li>
-    </ul>
-  </div>
-  <div class="card" id="v0.2.2">
-    <h2>v0.2.2에서 바뀐 것</h2>
-    <ul>
-      <li>한 줄 메시지 칸 오른쪽 위에 <b>× 닫기</b> 버튼이 생겼어요.</li>
-    </ul>
-  </div>
-  <div class="card" id="v0.2.1">
-    <h2>v0.2.1에서 바뀐 것</h2>
-    <ul>
-      <li><b>친구 냥멍이끼리 놀아요</b> — 깨어 있는 친구 둘이 가까이 있으면 가끔 ♥ ♪ 인사를 해요. 친구를 다른 친구 옆에 끌어다 놓으면 바로 인사해요. 몇 분에 한 번은 둘이 가운데서 만나 공놀이나 술래잡기를 하고 제자리로 돌아가요. 노는 중에 만지면 바로 제자리로 돌아와요.</li>
-      <li><b>친구 냥멍이 누르는 법이 바뀌었어요</b> — 한 번 누르면 한 줄 메시지 칸, 두 번 누르면 대화 창이 열려요(집과 같아요). 콕 찌르기는 오른쪽 클릭 메뉴에 있어요.</li>
-      <li>친구 냥멍이 바로 옆이나 발밑 이름표를 눌러도 잘 눌려요.</li>
-    </ul>
-  </div>
-  <div class="card" id="v0.2.0">
-    <h2>v0.2.0에서 바뀐 것</h2>
-    <ul>
-      <li><b>단체방을 바탕화면에 집으로 띄울 수 있어요</b> — 대화 창에서 단체방에 들어가 위쪽 [🏠 집 띄우기]를 눌러 보세요. 새 메시지가 오면 창문에 불이 켜지고 굴뚝에서 연기가 나요. 그 방 친구가 접속해 있으면 창문에 친구 얼굴이 보여요.<br>
-        집을 한 번 누르면 한 줄 메시지 칸, 두 번 누르면 대화 창이 열려요. 오른쪽 클릭하면 집 모양을 일곱 가지 중에서 고를 수 있어요(오두막·버섯집·딸기집·쿠키집·찻주전자집·우유팩집·컵케이크집).</li>
-      <li><b>화면에 띄운 친구들이 훨씬 가벼워졌어요</b> — 컴퓨터 메모리를 예전의 절반 남짓만 써요. 모니터를 두 대 쓰면 친구를 다른 모니터로 끌어다 놓을 수도 있어요.</li>
-      <li>1:1 대화방의 [나가기]가 <b>[목록에서 지우기]</b>로 바뀌었어요. 지워도 둘 중 누구든 메시지를 보내면 대화방이 다시 생겨요.</li>
-      <li>친구 목록이 한 줄로 깔끔해졌어요. 접속 중인지는 초록 점으로 보여요.</li>
-      <li>바탕화면 아이콘이 도트 고양이로 바뀌었어요.</li>
-      <li>대화방을 만들지 못할 때 괄호 안에 이유가 같이 나와요. 그 글자를 만든 사람에게 알려 주시면 원인을 찾을 수 있어요.</li>
-      <li>업데이트 뒤 말풍선은 짧게 알리고, 자세한 내용은 이 페이지에서 보게 바꿨어요.</li>
-    </ul>
-  </div>
-  <div class="card" id="v0.1.7">
-    <h2>v0.1.7에서 바뀐 것</h2>
-    <ul>
-      <li><b>보냈는지 바로 보여요</b> — 냥멍이를 두 번 눌러 쓰는 한 줄 칸에서 메시지를 보내면, 칸 위에 초록색 "✓ 보냈어요"가 잠깐 떠요. 인터넷 문제로 못 보내면 "전송을 실패했어요"가 뜨고 쓴 글은 칸에 그대로 남아요.</li>
-      <li>한 줄 칸 위 안내 글씨가 "메시지 보내기"로 바뀌었어요.</li>
-    </ul>
-  </div>
-  <div class="card" id="v0.1.6">
-    <h2>v0.1.6에서 바뀐 것</h2>
-    <ul>
-      <li><b>내 상태를 고를 수 있어요</b> — 대화 창 위쪽의 📚 수업 중 · 💼 회의 중 · ⏳ 바빠요를 누르면, 그동안 냥멍이가 알림 카드를 쉬고 숫자만 쌓아 둬요. 수업 중은 50분, 회의 중은 1시간, 바빠요는 30분 뒤에 저절로 풀려요. 친구들 화면에도 "📚 수업 중"이 보여요.</li>
-      <li><b>읽음 표시</b> — 내가 보낸 메시지 옆에 분홍 숫자 1이 붙고, 상대가 읽으면 사라져요. (상대도 이 버전이어야 사라져요)</li>
-      <li><b>친구를 누르면 바로 대화</b> — 🐾 친구 목록에서 친구 이름을 누르면 1:1 대화방이 바로 열려요.</li>
-      <li><b>안 읽은 개수</b> — 대화 목록에 점 대신 숫자로 나와요.</li>
-      <li><b>이어 쓰기</b> — 냥멍이를 두 번 눌러 쓰는 한 줄 칸이 보내도 안 닫혀요. 다 쓰면 Esc나 바깥을 눌러 닫아요.</li>
-      <li>같은 닉네임은 #번호를 붙여 구분하고, 메뉴의 💬 대화는 언제나 대화 목록부터 열려요.</li>
-    </ul>
-  </div>
-  <div class="card" id="v0.1.5">
-    <h2>v0.1.5에서 바뀐 것</h2>
-    <ul>
-      <li><b>강아지 얼굴을 다듬었어요</b> — 코와 주둥이를 작게 하고 입을 연하게 해서, 고양이처럼 동글동글한 얼굴이 됐어요.</li>
-    </ul>
-  </div>
-  <div class="card" id="v0.1.4">
-    <h2>v0.1.4에서 바뀐 것</h2>
-    <ul>
-      <li><b>숫자를 누르면 지난 메시지까지 보여요</b> — 메시지가 여러 개 쌓였을 때 분홍 숫자를 누르면, 최근 것만이 아니라 안 읽은 메시지가 위에서부터 차례로 보여요. 많이 쌓였으면 "앞에 N개 더"라고 알려 주고, 카드를 누르면 대화 창에서 전부 볼 수 있어요. 화면에 띄운 친구 옆 숫자도 똑같아요.</li>
-      <li><b>친구를 6명까지 띄울 수 있어요</b> — 4명에서 늘었어요. 왼쪽에 자리가 모자라면 오른쪽으로 이어서 놓여요.</li>
-    </ul>
-  </div>
-  <div class="card" id="v0.1.3">
-    <h2>v0.1.3에서 고친 것</h2>
-    <ul>
-      <li><b>클로드 작업 말풍선이 다시 떠요</b> — 원래 냥멍이도 깔려 있는 컴퓨터에서, 냥멍톡이 업데이트된 뒤 클로드 작업 말풍선이 안 뜨던 문제를 고쳤어요. 이번 업데이트를 받으면 저절로 다시 떠요.</li>
-      <li>업데이트되면 바뀐 것을 말풍선으로 알려 드려요.</li>
-    </ul>
-  </div>
-  <div class="card" id="v0.1.2">
-    <h2>v0.1.2에서 바뀐 것</h2>
-    <ul>
-      <li><b>닉네임을 바꿀 수 있어요</b> — 대화 창 맨 위 '내 코드' 칸의 ✏️를 누르면 돼요. 번호는 그대로이고(세니#2344 → 새이름#2344), 친구들 화면의 대화방·친구 목록·띄운 냥멍이 이름표도 같이 바뀌어요. 이미 친구인 사람은 그대로 친구예요. 새 친구에게는 바뀐 코드를 알려 주세요.</li>
-    </ul>
-  </div>
-  <div class="card" id="v0.1.1">
-    <h2>v0.1.1에서 바뀐 것</h2>
-    <ul>
-      <li><b>냥멍이가 도트 그림이 됐어요</b> — 옛날 게임 같은 작은 네모 그림으로 바뀌었어요. 고양이·강아지 무늬 12가지와 소품 5가지 모두 도트로 나와요.</li>
-      <li><b>분홍 숫자를 누르면 못 본 말풍선이 다시 떠요</b> — 메시지를 놓쳐서 숫자가 쌓였을 때 숫자를 누르면, 대화 창을 열지 않고도 못 본 카드들을 냥멍이 위에서 바로 볼 수 있어요. 한 번 더 누르면 접혀요.</li>
-      <li><b>화면에 띄운 친구 옆에 숫자가 떠요</b> — 띄워 둔 친구가 보낸 메시지를 못 보면 그 친구 냥멍이 옆에 숫자가 남아요. 누르면 그 친구 머리 위에 말풍선이 다시 떠요.</li>
-      <li><b>친구 냥멍이를 두 번 누르면 바로 한 줄 쓰기</b> — 대화 창 대신 말풍선 자리에 입력칸이 떠요. 쓰고 엔터 치면 끝. 대화 창은 오른쪽 클릭 → 💬 대화로 열 수 있어요.</li>
-      <li><b>모습 고르는 칸이 잘리지 않아요</b> — 화면이 좁은 컴퓨터에서 무늬·소품이 다 안 보이던 것을 고쳤어요. 넘치면 옆의 ‹ › 를 눌러 넘겨 보면 돼요.</li>
-      <li>혼자 상자에 쏙 들어가던 동작은 뺐어요.</li>
-    </ul>
-  </div>
-  </details>
+      <div class="how">
+        <div class="pics"><div class="shotbox plain"><img class="zoomable" src="img/cat_menu.webp" alt="냥멍이 메뉴" loading="lazy"></div></div>
+        <div>
+          <h3>대화 창 열기</h3>
+          <ol>
+            <li>내 냥멍이를 <b>두 번 클릭</b>해요.</li>
+            <li><b>💬 대화</b>를 눌러요.</li>
+            <li>처음이면 닉네임을 정해요. <b>세니#2048</b> 같은 내 코드가 생겨요.</li>
+          </ol>
+        </div>
+      </div>
 
-  <div class="card">
-    <h2>알아두면 좋은 것</h2>
-    <div class="note">
-      설치할 때 파란 경고창이 뜨면 <b>"추가 정보" → "실행"</b>을 눌러 주세요.
-      개인이 만든 프로그램이라 뜨는 안내예요.
-    </div>
-    <ul style="margin-top:14px">
-      <li>메시지는 보낸 지 하루가 지나면 사라져요.</li>
-      <li>수업 중엔 설정 → <b>대화 오면 말풍선으로 알려주기</b>를 꺼 두면 조용해요.</li>
-      <li>자세한 쓰는 법은 <a class="guide" href="https://miynuees.github.io/nyangmungtalk/%EB%83%A5%EB%A9%8D%ED%86%A1_%EC%82%AC%EC%9A%A9%EC%95%88%EB%82%B4.html">사용안내</a>에 있어요.</li>
-    </ul>
+      <div class="how flip">
+        <div class="pics">
+          <div class="shotbox"><img class="zoomable" src="img/chat_home.webp" alt="내 코드" loading="lazy"><i class="ring" style="left:74%;top:13.6%;width:19%;height:8.2%"></i></div>
+          <div class="shotbox"><img class="zoomable" src="img/chat_friends.webp" alt="친구 코드로 추가" loading="lazy"><i class="ring" style="left:2.5%;top:18.8%;width:95%;height:10.6%"></i></div>
+        </div>
+        <div>
+          <h3>친구 추가하기</h3>
+          <ol>
+            <li><b>📋 복사</b>를 눌러 내 코드를 친구에게 알려 줘요.</li>
+            <li>친구 코드를 받으면 <b>🐾 친구</b>를 눌러요.</li>
+            <li>코드를 넣고 <b>➕ 추가</b>. 끝!</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="how">
+        <div class="pics"><div class="shotbox"><img class="zoomable" src="img/chat_friends.webp" alt="화면에 띄우기" loading="lazy"><i class="ring" style="left:63%;top:46.8%;width:23.6%;height:6.8%"></i></div></div>
+        <div>
+          <h3>바탕화면에 친구 띄우기</h3>
+          <ol>
+            <li>🐾 친구 목록에서 <b>화면에 띄우기</b>를 눌러요.</li>
+            <li>친구 냥멍이가 바탕화면에 나와요. 끌어서 원하는 곳에 두면 돼요. (최대 6명)</li>
+            <li><b>클릭</b>하면 한 줄 메시지, <b>두 번 클릭</b>하면 대화 창이 열려요.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="how flip">
+        <div class="pics">
+          <div class="shotbox"><img class="zoomable" src="img/chat_group.webp" alt="집 띄우기" loading="lazy"><i class="ring" style="left:54%;top:2.2%;width:20.6%;height:7.4%"></i></div>
+          <div class="shotbox plain"><img class="zoomable" src="img/house_kinds.webp" alt="집 모양 고르기" loading="lazy"></div>
+        </div>
+        <div>
+          <h3>단체방 집 만들기</h3>
+          <ol>
+            <li><b>💬 새 대화</b>에서 친구를 여러 명 골라 단체방을 만들어요.</li>
+            <li>단체방 위쪽 <b>🏠 집 띄우기</b>를 눌러요.</li>
+            <li>집을 <b>오른쪽 클릭 → 🏠 모양</b>에서 7가지 집 중에 골라요.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="how">
+        <div class="pics"><div class="shotbox plain"><img class="zoomable" src="img/cat_card.webp" alt="메시지 알림 카드" loading="lazy"></div></div>
+        <div>
+          <h3>메시지가 오면</h3>
+          <ol>
+            <li>냥멍이 위에 카드가 떠요. <b>답장</b>을 누르면 바로 답해요.</li>
+            <li>놓친 메시지는 <b>분홍 숫자</b>로 남아요. 누르면 다시 보여요.</li>
+            <li>수업 중엔 대화 창 위 <b>📚 수업 중</b>을 눌러 두면 조용해요.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="tips">
+        <div class="tip"><span class="ic">⏳</span>메시지는 하루가 지나면 사라져요.</div>
+        <div class="tip"><span class="ic">🐾</span>냥멍이 기능(급식·할 일·Claude 알림)도 그대로 있어요.</div>
+        <div class="tip"><span class="ic">📖</span>자세한 설명은 <a href="https://miynuees.github.io/nyangmungtalk/%EB%83%A5%EB%A9%8D%ED%86%A1_%EC%82%AC%EC%9A%A9%EC%95%88%EB%82%B4.html">사용안내</a>에 있어요.</div>
+      </div>
+    </section>
+
+    <section class="block log">
+      <h2 class="sec">업데이트 기록</h2>
+      <div class="card" id="v0.3.0">
+        <h2>v0.3.0에서 바뀐 것</h2>
+        <ul>
+          <li><b>할 일·일정을 말풍선에 고정</b>할 수 있어요. 📅 오늘 → 할 일이나 일정 탭에서 [말풍선 고정]을 누르면 냥멍이 머리 위에 노란 쪽지가 계속 떠 있어요. 새 메시지 카드는 쪽지 위로 쌓여요.</li>
+          <li><b>바탕화면에만 둘 수 있어요.</b> ⚙️ 설정 → "화면에 있을 곳"을 [바탕화면에만]으로 바꾸면 냥멍이·친구·집이 다른 창 뒤에 있다가 바탕화면을 볼 때(Win+D)만 보여요. Claude가 허락을 기다릴 때는 잠깐 앞으로 나와요.</li>
+          <li><b>설정을 줄였어요.</b> 기지개 권유·어슬렁 걷기·먼저 말 걸기·깨어 있기는 이제 늘 켜져 있어요.</li>
+        </ul>
+      </div>
+          <details class="older">
+        <summary>지난 버전 더 보기</summary>
+          <div class="card" id="v0.2.5">
+            <h2>v0.2.5에서 바뀐 것</h2>
+            <ul>
+              <li><b>내 냥멍이에게도 👑 이름표</b>가 생겼어요. 친구 냥멍이와 같은 높이로 서요.</li>
+              <li>내 냥멍이도 작업 표시줄 아래로 숨거나 화면 밖으로 나가지 않아요.</li>
+              <li><b>겹쳐 있는 친구 냥멍이가 잘 눌려요.</b> 겹친 부분을 누르면 뒤에 있는 다른 프로그램이 눌리던 문제를 고쳤어요. 겹쳐 있으면 앞에 보이는 친구가 잡혀요.</li>
+              <li>다른 프로그램 창이 냥멍이 위를 덮어도 곧 다시 냥멍이가 맨 위로 올라와요.</li>
+            </ul>
+          </div>
+          <div class="card" id="v0.2.4">
+            <h2>v0.2.4에서 바뀐 것</h2>
+            <ul>
+              <li><b>내 냥멍이도 친구들과 놀아요</b> — 깨어 있는 친구가 옆에 있으면 서로 ♥ ♪ 인사를 하고, 가끔 친구가 내 냥멍이 옆으로 걸어와서 공을 주고받아요. 내 냥멍이를 친구 옆에 끌어다 놓아도 인사해요.</li>
+              <li>클로드가 일하는 중이거나 말풍선·메뉴가 떠 있을 땐 놀지 않아요.</li>
+            </ul>
+          </div>
+          <div class="card" id="v0.2.3">
+            <h2>v0.2.3에서 바뀐 것</h2>
+            <ul>
+              <li><b>냥멍이·친구 냥멍이·집이 조금 작아졌어요</b> (80%). 친구 냥멍이와 내 냥멍이가 같은 크기예요.</li>
+              <li>캐릭터 바로 옆 빈 곳을 누르면 뒤에 있는 바탕화면·프로그램이 눌려요. 클릭 범위를 캐릭터에 딱 맞게 줄였어요.</li>
+              <li>한 줄 메시지 칸에 <b>누구에게 보내는지</b> 나와요. (예: 메시지 보내기 · 워니 님에게)</li>
+            </ul>
+          </div>
+          <div class="card" id="v0.2.2">
+            <h2>v0.2.2에서 바뀐 것</h2>
+            <ul>
+              <li>한 줄 메시지 칸 오른쪽 위에 <b>× 닫기</b> 버튼이 생겼어요.</li>
+            </ul>
+          </div>
+          <div class="card" id="v0.2.1">
+            <h2>v0.2.1에서 바뀐 것</h2>
+            <ul>
+              <li><b>친구 냥멍이끼리 놀아요</b> — 깨어 있는 친구 둘이 가까이 있으면 가끔 ♥ ♪ 인사를 해요. 친구를 다른 친구 옆에 끌어다 놓으면 바로 인사해요. 몇 분에 한 번은 둘이 가운데서 만나 공놀이나 술래잡기를 하고 제자리로 돌아가요. 노는 중에 만지면 바로 제자리로 돌아와요.</li>
+              <li><b>친구 냥멍이 누르는 법이 바뀌었어요</b> — 한 번 누르면 한 줄 메시지 칸, 두 번 누르면 대화 창이 열려요(집과 같아요). 콕 찌르기는 오른쪽 클릭 메뉴에 있어요.</li>
+              <li>친구 냥멍이 바로 옆이나 발밑 이름표를 눌러도 잘 눌려요.</li>
+            </ul>
+          </div>
+          <div class="card" id="v0.2.0">
+            <h2>v0.2.0에서 바뀐 것</h2>
+            <ul>
+              <li><b>단체방을 바탕화면에 집으로 띄울 수 있어요</b> — 대화 창에서 단체방에 들어가 위쪽 [🏠 집 띄우기]를 눌러 보세요. 새 메시지가 오면 창문에 불이 켜지고 굴뚝에서 연기가 나요. 그 방 친구가 접속해 있으면 창문에 친구 얼굴이 보여요.<br>
+                집을 한 번 누르면 한 줄 메시지 칸, 두 번 누르면 대화 창이 열려요. 오른쪽 클릭하면 집 모양을 일곱 가지 중에서 고를 수 있어요(오두막·버섯집·딸기집·쿠키집·찻주전자집·우유팩집·컵케이크집).</li>
+              <li><b>화면에 띄운 친구들이 훨씬 가벼워졌어요</b> — 컴퓨터 메모리를 예전의 절반 남짓만 써요. 모니터를 두 대 쓰면 친구를 다른 모니터로 끌어다 놓을 수도 있어요.</li>
+              <li>1:1 대화방의 [나가기]가 <b>[목록에서 지우기]</b>로 바뀌었어요. 지워도 둘 중 누구든 메시지를 보내면 대화방이 다시 생겨요.</li>
+              <li>친구 목록이 한 줄로 깔끔해졌어요. 접속 중인지는 초록 점으로 보여요.</li>
+              <li>바탕화면 아이콘이 도트 고양이로 바뀌었어요.</li>
+              <li>대화방을 만들지 못할 때 괄호 안에 이유가 같이 나와요. 그 글자를 만든 사람에게 알려 주시면 원인을 찾을 수 있어요.</li>
+              <li>업데이트 뒤 말풍선은 짧게 알리고, 자세한 내용은 이 페이지에서 보게 바꿨어요.</li>
+            </ul>
+          </div>
+          <div class="card" id="v0.1.7">
+            <h2>v0.1.7에서 바뀐 것</h2>
+            <ul>
+              <li><b>보냈는지 바로 보여요</b> — 냥멍이를 두 번 눌러 쓰는 한 줄 칸에서 메시지를 보내면, 칸 위에 초록색 "✓ 보냈어요"가 잠깐 떠요. 인터넷 문제로 못 보내면 "전송을 실패했어요"가 뜨고 쓴 글은 칸에 그대로 남아요.</li>
+              <li>한 줄 칸 위 안내 글씨가 "메시지 보내기"로 바뀌었어요.</li>
+            </ul>
+          </div>
+          <div class="card" id="v0.1.6">
+            <h2>v0.1.6에서 바뀐 것</h2>
+            <ul>
+              <li><b>내 상태를 고를 수 있어요</b> — 대화 창 위쪽의 📚 수업 중 · 💼 회의 중 · ⏳ 바빠요를 누르면, 그동안 냥멍이가 알림 카드를 쉬고 숫자만 쌓아 둬요. 수업 중은 50분, 회의 중은 1시간, 바빠요는 30분 뒤에 저절로 풀려요. 친구들 화면에도 "📚 수업 중"이 보여요.</li>
+              <li><b>읽음 표시</b> — 내가 보낸 메시지 옆에 분홍 숫자 1이 붙고, 상대가 읽으면 사라져요. (상대도 이 버전이어야 사라져요)</li>
+              <li><b>친구를 누르면 바로 대화</b> — 🐾 친구 목록에서 친구 이름을 누르면 1:1 대화방이 바로 열려요.</li>
+              <li><b>안 읽은 개수</b> — 대화 목록에 점 대신 숫자로 나와요.</li>
+              <li><b>이어 쓰기</b> — 냥멍이를 두 번 눌러 쓰는 한 줄 칸이 보내도 안 닫혀요. 다 쓰면 Esc나 바깥을 눌러 닫아요.</li>
+              <li>같은 닉네임은 #번호를 붙여 구분하고, 메뉴의 💬 대화는 언제나 대화 목록부터 열려요.</li>
+            </ul>
+          </div>
+          <div class="card" id="v0.1.5">
+            <h2>v0.1.5에서 바뀐 것</h2>
+            <ul>
+              <li><b>강아지 얼굴을 다듬었어요</b> — 코와 주둥이를 작게 하고 입을 연하게 해서, 고양이처럼 동글동글한 얼굴이 됐어요.</li>
+            </ul>
+          </div>
+          <div class="card" id="v0.1.4">
+            <h2>v0.1.4에서 바뀐 것</h2>
+            <ul>
+              <li><b>숫자를 누르면 지난 메시지까지 보여요</b> — 메시지가 여러 개 쌓였을 때 분홍 숫자를 누르면, 최근 것만이 아니라 안 읽은 메시지가 위에서부터 차례로 보여요. 많이 쌓였으면 "앞에 N개 더"라고 알려 주고, 카드를 누르면 대화 창에서 전부 볼 수 있어요. 화면에 띄운 친구 옆 숫자도 똑같아요.</li>
+              <li><b>친구를 6명까지 띄울 수 있어요</b> — 4명에서 늘었어요. 왼쪽에 자리가 모자라면 오른쪽으로 이어서 놓여요.</li>
+            </ul>
+          </div>
+          <div class="card" id="v0.1.3">
+            <h2>v0.1.3에서 고친 것</h2>
+            <ul>
+              <li><b>클로드 작업 말풍선이 다시 떠요</b> — 원래 냥멍이도 깔려 있는 컴퓨터에서, 냥멍톡이 업데이트된 뒤 클로드 작업 말풍선이 안 뜨던 문제를 고쳤어요. 이번 업데이트를 받으면 저절로 다시 떠요.</li>
+              <li>업데이트되면 바뀐 것을 말풍선으로 알려 드려요.</li>
+            </ul>
+          </div>
+          <div class="card" id="v0.1.2">
+            <h2>v0.1.2에서 바뀐 것</h2>
+            <ul>
+              <li><b>닉네임을 바꿀 수 있어요</b> — 대화 창 맨 위 '내 코드' 칸의 ✏️를 누르면 돼요. 번호는 그대로이고(세니#2344 → 새이름#2344), 친구들 화면의 대화방·친구 목록·띄운 냥멍이 이름표도 같이 바뀌어요. 이미 친구인 사람은 그대로 친구예요. 새 친구에게는 바뀐 코드를 알려 주세요.</li>
+            </ul>
+          </div>
+          <div class="card" id="v0.1.1">
+            <h2>v0.1.1에서 바뀐 것</h2>
+            <ul>
+              <li><b>냥멍이가 도트 그림이 됐어요</b> — 옛날 게임 같은 작은 네모 그림으로 바뀌었어요. 고양이·강아지 무늬 12가지와 소품 5가지 모두 도트로 나와요.</li>
+              <li><b>분홍 숫자를 누르면 못 본 말풍선이 다시 떠요</b> — 메시지를 놓쳐서 숫자가 쌓였을 때 숫자를 누르면, 대화 창을 열지 않고도 못 본 카드들을 냥멍이 위에서 바로 볼 수 있어요. 한 번 더 누르면 접혀요.</li>
+              <li><b>화면에 띄운 친구 옆에 숫자가 떠요</b> — 띄워 둔 친구가 보낸 메시지를 못 보면 그 친구 냥멍이 옆에 숫자가 남아요. 누르면 그 친구 머리 위에 말풍선이 다시 떠요.</li>
+              <li><b>친구 냥멍이를 두 번 누르면 바로 한 줄 쓰기</b> — 대화 창 대신 말풍선 자리에 입력칸이 떠요. 쓰고 엔터 치면 끝. 대화 창은 오른쪽 클릭 → 💬 대화로 열 수 있어요.</li>
+              <li><b>모습 고르는 칸이 잘리지 않아요</b> — 화면이 좁은 컴퓨터에서 무늬·소품이 다 안 보이던 것을 고쳤어요. 넘치면 옆의 ‹ › 를 눌러 넘겨 보면 돼요.</li>
+              <li>혼자 상자에 쏙 들어가던 동작은 뺐어요.</li>
+            </ul>
+          </div>
+              </details>
+    </section>
   </div>
-  </section>
 
   <p class="foot">만든 사람: Seni · 불편한 점은 편하게 알려 주세요</p>
 </div>
+<div id="zoom"><img alt=""></div>
 <script src="pixelpet.js"></script>
 <script>
   // 맨 위 그림: 냥멍톡 안에서 쓰는 것과 같은 도트 그림 (치즈 고양이 + 리본 단 점박이 강아지)
@@ -422,9 +512,9 @@
 </script>
 <script>
   // 탭마다 바뀌는 머리말. 버전 번호가 1.x면 냥멍이, 0.x면 냥멍톡 (앱의 [바뀐 것 보기]가 #v버전 으로 들어옴)
-  var HEAD = {
-    cat:  { title:'냥멍이', lead:'화면 구석에 사는 작은 고양이(또는 강아지).<br>급식·날씨·할 일·일정을 조용히 챙겨줍니다.', ver:'지금 버전 v1.7.0' },
-    talk: { title:'냥멍톡', lead:'화면 구석의 작은 냥멍이로<br>아는 선생님들과 짧게 이야기 나눠요.', ver:'지금 버전 v0.3.0 (시험판)' }
+  var LEAD = {
+    cat:  '화면 구석에 사는 작은 고양이(또는 강아지).<br>급식·날씨·할 일·일정을 조용히 챙겨 줘요.',
+    talk: '화면 구석의 작은 냥멍이로<br>아는 선생님들과 짧게 이야기 나눠요.'
   };
   function pickTab(which, byClick) {
     ['cat', 'talk'].forEach(function (k) {
@@ -433,9 +523,7 @@
     });
     document.querySelector('.art .cat').toggleAttribute('hidden', which !== 'cat');
     document.getElementById('art-talk').hidden = (which !== 'talk');
-    document.getElementById('title').textContent = HEAD[which].title;
-    document.getElementById('lead').innerHTML = HEAD[which].lead;
-    document.getElementById('ver').textContent = HEAD[which].ver;
+    document.getElementById('lead').innerHTML = LEAD[which];
     if (byClick) history.replaceState(null, '', which === 'talk' ? '#talk' : location.pathname);
   }
   function fromHash() {
@@ -450,6 +538,14 @@
   }
   window.addEventListener('hashchange', fromHash);
   fromHash();
+
+  // 그림 누르면 크게
+  var zoom = document.getElementById('zoom');
+  document.addEventListener('click', function (e) {
+    if (e.target.classList && e.target.classList.contains('zoomable')) { zoom.querySelector('img').src = e.target.src; zoom.classList.add('on'); }
+    else if (zoom.classList.contains('on')) zoom.classList.remove('on');
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') zoom.classList.remove('on'); });
 </script>
 </body>
 </html>
